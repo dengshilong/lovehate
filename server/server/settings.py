@@ -15,6 +15,7 @@ import os
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
+RUN_ENV = os.getenv("RUN_ENV", default='dev')
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.10/howto/deployment/checklist/
@@ -38,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'user',
+    'love'
 ]
 
 MIDDLEWARE = [
@@ -120,3 +122,17 @@ USE_TZ = False
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR,'static/classic/')
+STATIC_URL = '/static/classic/'
+MEDIA_ROOT = os.path.join(BASE_DIR,'static/upload/')
+MEDIA_URL = '/static/upload/'
+
+
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR,'static'),
+)
+
+
+TEMPLATE_DIRS = (
+    os.path.join(BASE_DIR,'templates'),
+)

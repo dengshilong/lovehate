@@ -31,6 +31,7 @@ class MyUserManager(BaseUserManager):
 class User(AbstractBaseUser,PermissionsMixin):
     nick = models.CharField('昵称', max_length=30, unique=True)
     mobile = models.CharField('手机号',max_length=20, blank=True)
+    is_staff = models.BooleanField('是否内部人员', default=False)
     create_time = models.DateTimeField('注册时间', auto_now_add=True)
     update_time = models.DateTimeField(auto_now=True)
 
