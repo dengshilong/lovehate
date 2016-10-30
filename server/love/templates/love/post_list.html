@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block content %}
+    {% if post_list %}
+        {% for post in post_list %}
+            {% include "love/_post.html" %}
+        {% endfor %}
+    {% else %}
+        <h2>No images</h2>
+    {% endif %}
+{% endblock %}
