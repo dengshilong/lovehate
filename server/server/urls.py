@@ -18,14 +18,16 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from . import settings
 from love.views import Index
-from user.views import login, logout
+from user.views import login, logout, register
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^like/', include('love.urls')),
+    url(r'^love/', include('love.urls')),
     url(r'^$', Index.as_view(), name='index'),
-    url(r'login', login, name='login'),
-    url(r'logout', logout, name='logout')
+    url(r'^login$', login, name='login'),
+    url(r'^logout$', logout, name='logout'),
+    url(r'^register$', register, name='register'),
+    url(r'^user/', include('user.urls')),
 ]
 
 

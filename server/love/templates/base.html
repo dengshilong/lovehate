@@ -43,6 +43,7 @@
           <ul class="nav navbar-nav">
               {% if user.is_authenticated %}
                 <li><a href="/logout">退出</a></li>
+                <li><a href="{% url 'post_create' %}">记下此刻心情</a></li>
               {% else %}
                 <li><a href="/login">登录</a></li>
               {% endif %}

@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block content %}
+    <form class="form-signin" role="form" action="{% url 'register' %}" method="post">
+        {% csrf_token %}
+        <h2 class="form-signin-heading">请输入昵称和密码</h2>
+        <input type="text" name="nick" class="form-control" placeholder="昵称" required autofocus>
+        <input type="text" name="password" class="form-control" placeholder="密码" required>
+        {% if msg %}
+			<div class="form-group">
+				<label  class="col-sm-3 control-label no-padding-right">&nbsp;</label>
+				<div class="col-sm-5">
+					<span class="help_line red">{{msg}}</span>
+				</div>
+			</div>
+        {% endif %}
+        <button class="btn btn-lg btn-primary btn-block" type="submit">创建用户</button>
+    </form>
+{% endblock %}
