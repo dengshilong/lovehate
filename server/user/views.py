@@ -3,11 +3,13 @@ from django.contrib.auth import authenticate
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
+from django.utils.http import is_safe_url
 from django.views import View
 import hashlib
 from django.contrib.auth.hashers import make_password
 
 from .models import User
+REDIRECT_FIELD_NAME = 'next'
 # Create your views here.
 class UserLogin(View):
     model = User
@@ -49,6 +51,13 @@ def login(request):
         if request.user.is_authenticated():
             return HttpResponseRedirect(reverse('index'))
         nick = request.GET.get("nick", "")
+
+        next_page = request.GET.get(REDIRECT_FIELD_NAME, "")  # 默认 next
+        if next_page == "":
+            next_page = reverse("index")
+        if not is_safe_url(url=next_page, host=request.get_host()):
+            next_page = reverse("index")
+        request.session['next_page'] = next_page
         return render(request, "user/login.html", {"nick": nick})
     elif request.method == "POST":
         nick = request.POST.get("nick",'').lower().strip()
@@ -59,7 +68,12 @@ def login(request):
         user = authenticate(nick=nick, password=password)
         if user:
             auth.login(request, user)
-            return HttpResponseRedirect(reverse('index'))
+
+            rn = request.session.get('next_page', '')
+            if rn:
+                if rn.replace("https?://", "") == request.get_host() + "/":
+                    return HttpResponseRedirect(rn)
+            return HttpResponseRedirect(request.session.get('next_page', reverse("index")))
         else:
             data={"nick": nick, "msg": '账号或密码错误'}
             return render(request,"user/login.html", data)

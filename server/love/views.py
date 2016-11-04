@@ -22,7 +22,7 @@ class CreatePost(generic.CreateView):
         return reverse('index')
 
     def form_valid(self, form):
-        name = self.request.POST.get('category', '默认')
+        name = self.request.POST.get('category', '无题')
         category = Category.objects.filter(name=name).first()
         if not category:
             category = Category(name=name)

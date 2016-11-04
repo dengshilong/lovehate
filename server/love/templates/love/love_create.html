@@ -3,7 +3,7 @@
     <form class="form-post-create" role="form" action="" enctype="multipart/form-data" method="post">
         {% csrf_token %}
         <h2 class="form-post-heading">记下此刻的心情</h2>
-        <input type="text" name="category" class="form-control" placeholder="说点什么" required autofocus>
+        <input type="text" name="category" class="form-control" placeholder="说点什么" autofocus>
         <input type="file" name="cover" value="{{form.cover.value}}" required></input>
          {% if form.cover %}
             <img src="{{form.cover.url}}" class="img-responsive" onclick="change_caver_pic()">
