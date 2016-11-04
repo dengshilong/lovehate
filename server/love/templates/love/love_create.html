@@ -8,7 +8,13 @@
          {% if form.cover %}
             <img src="{{form.cover.url}}" class="img-responsive" onclick="change_caver_pic()">
          {% endif %}
-        <button class="btn btn-lg btn-primary btn-block" type="submit">提交</button>
+        <button id="sub-btn" class="btn btn-lg btn-primary btn-block" type="submit">提交</button>
 
     </form>
+    <script>
+        (function(win){
+            console.log('okok')
+            document.getElementById('sub-btn').addEventListener('click',
+        })(window)
+    </script>
 {% endblock %}
