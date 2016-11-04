@@ -79,8 +79,12 @@ AUTH_USER_MODEL = 'user.User'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'lovehate',
+        'USER': 'root',
+        'PASSWORD': 'mysql123',
+        'HOST': '192.168.1.100',
+        'PORT': '3306',
     }
 }
 
@@ -127,9 +131,9 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'static/upload/')
 MEDIA_URL = '/static/upload/'
 
 STATICFILES_DIRS = (
-    os.path.join(BASE_DIR,'static'),
+    os.path.join(BASE_DIR, 'static'),
 )
 
 TEMPLATE_DIRS = (
-    os.path.join(BASE_DIR,'templates'),
+    os.path.join(BASE_DIR, 'templates'),
 )

@@ -6,12 +6,14 @@
 
 
 from django.conf.urls import url
+from django.contrib.auth.decorators import login_required
 
 from .views import PostCreate, Index, CategoryList
 
 urlpatterns = [  # pylint: disable=C0103
     url(r'^$', Index.as_view(), name='index'),
-    url(r'^add/?$', PostCreate.as_view(), name='post_create'),
+    url(r'^add/?$', login_required(PostCreate.as_view(),
+                                   login_url='/login'), name='post_create'),
     url(r'^category/(?P<category>\w+)/?$',
         CategoryList.as_view(), name='post_category'),
 
