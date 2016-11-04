@@ -1,4 +1,4 @@
 <div class="blog-post">
-  <h3 class="blog-post-title"><a href="{{ post.get_absolute_url }}">{{ post.category }}</a></h3>
-  <img class="img-responsive" src="{{ post.cover.url}}"></img>
+  <h3 class="blog-post-title"><a href="{% url 'post_category' post.category %}">{{ post.category }}</a></h3>
+  <a href="{{ post.cover.url}}"><img class="img-responsive" src="{{ post.cover.url}}"></img></a>
 </div>

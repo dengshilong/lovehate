@@ -16,21 +16,21 @@ Including another URLconf
 from django.conf.urls import url, include
 from django.conf.urls.static import static
 from django.contrib import admin
-from . import settings
-from love.views import Index
 from user.views import login, logout, register
+from . import settings
 
-urlpatterns = [
+urlpatterns = [  # pylint: disable=C0103
     url(r'^admin/', admin.site.urls),
-    url(r'^love/', include('love.urls')),
-    url(r'^$', Index.as_view(), name='index'),
     url(r'^login$', login, name='login'),
     url(r'^logout$', logout, name='logout'),
     url(r'^register$', register, name='register'),
     url(r'^user/', include('user.urls')),
+    url(r'^', include('love.urls')),
 ]
 
 
 if settings.DEBUG:
-    urlpatterns += static(settings.STATIC_URL, document_root = settings.STATIC_ROOT )
-    urlpatterns += static(settings.MEDIA_URL , document_root = settings.MEDIA_ROOT )
+    urlpatterns += static(settings.STATIC_URL,
+                          document_root=settings.STATIC_ROOT)
+    urlpatterns += static(settings.MEDIA_URL,
+                          document_root=settings.MEDIA_ROOT)
