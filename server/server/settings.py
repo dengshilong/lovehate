@@ -76,14 +76,16 @@ AUTH_USER_MODEL = 'user.User'
 
 # Database
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases
-
+DB_HOST = "127.0.0.1"
+if RUN_ENV == "dev":
+    DB_HOST = '192.168.1.100'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'lovehate',
         'USER': 'root',
         'PASSWORD': 'mysql123',
-        'HOST': '192.168.1.100',
+        'HOST': DB_HOST,
         'PORT': '3306',
     }
 }
