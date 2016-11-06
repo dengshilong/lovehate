@@ -15,7 +15,7 @@ import os
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-RUN_ENV = os.getenv("RUN_ENV", default='dev')
+RUN_ENV = os.getenv("RUN_ENV", default='deploy')
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.10/howto/deployment/checklist/
@@ -24,7 +24,9 @@ RUN_ENV = os.getenv("RUN_ENV", default='dev')
 SECRET_KEY = 'gsnsx^tysd(qwq91oxnq^v1cs)2-tnps1u^hgxxyejskvl1t!k'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
+if RUN_ENV == 'dev':
+    DEBUG = True
 
 ALLOWED_HOSTS = []
 
