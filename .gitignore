@@ -3,3 +3,4 @@
 .idea/
 server/static/upload
 server/static/classic/upload
+server/logs
