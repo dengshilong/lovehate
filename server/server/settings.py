@@ -28,7 +28,7 @@ DEBUG = False
 if RUN_ENV == 'dev':
     DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1', 'lovehate.cc']
 
 
 # Application definition
