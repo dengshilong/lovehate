@@ -19,10 +19,8 @@ RUNDIR=$(dirname $SOCKFILE)
 test -d $RUNDIR || mkdir -p $RUNDIR
 # Start your Django Unicorn
 # Programs meant to be run under supervisor should not daemonize themselves (do not use --daemon)
-LOG_FILE=./logs/dengshilong.log
 exec gunicorn ${DJANGO_WSGI_MODULE}:application -k gevent \
   --name $NAME \
   --workers $NUM_WORKERS \
   --bind=127.0.0.1:8000 \
   --log-level=debug \
-  --log-file=$LOG_FILE
