@@ -1,6 +1,5 @@
 *.pyc
 *.swp
 .idea/
-server/static/upload
-server/static/classic/upload
-server/logs
+media/*
+logs/*

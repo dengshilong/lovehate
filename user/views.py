@@ -11,6 +11,8 @@ from django.contrib.auth.hashers import make_password
 from .models import User
 REDIRECT_FIELD_NAME = 'next'
 # Create your views here.
+
+
 class UserLogin(View):
     model = User
     fields = ['username', 'password']
@@ -26,16 +28,16 @@ def register(request):
     if request.user.is_authenticated():
         return HttpResponseRedirect(reverse('index'))
     if request.method == "GET":
-        return render(request,"user/register.html")
+        return render(request, "user/register.html")
     if request.method == "POST":
-        nick = request.POST.get("nick",'').lower().strip()
+        nick = request.POST.get("nick", '').lower().strip()
         password = request.POST.get("password", '')
         if nick == "" or password == "":
-            data = {"nick":nick, "msg": '请输入用户名或密码'}
-            return render(request,"user/register.html", data)
+            data = {"nick": nick, "msg": '请输入用户名或密码'}
+            return render(request, "user/register.html", data)
         if User.objects.filter(nick=nick).exists():
-            data = {"nick":nick, "msg": '该昵称已存在'}
-            return render(request,"user/register.html", data)
+            data = {"nick": nick, "msg": '该昵称已存在'}
+            return render(request, "user/register.html", data)
         password = make_password(password)
         user = User(nick=nick, password=password)
         user.save()
@@ -45,6 +47,7 @@ def register(request):
 def logout(request):
     auth.logout(request)
     return HttpResponseRedirect(reverse('index'))
+
 
 def login(request):
     if request.method == "GET":
@@ -60,11 +63,11 @@ def login(request):
         request.session['next_page'] = next_page
         return render(request, "user/login.html", {"nick": nick})
     elif request.method == "POST":
-        nick = request.POST.get("nick",'').lower().strip()
+        nick = request.POST.get("nick", '').lower().strip()
         password = request.POST.get("password", '')
         if nick == "" or password == "":
-            data = {"nick":nick, "msg": '请输入用户名或密码'}
-            return render(request,"user/login.html", data)
+            data = {"nick": nick, "msg": '请输入用户名或密码'}
+            return render(request, "user/login.html", data)
         user = authenticate(nick=nick, password=password)
         if user:
             auth.login(request, user)
@@ -75,5 +78,5 @@ def login(request):
                     return HttpResponseRedirect(rn)
             return HttpResponseRedirect(request.session.get('next_page', reverse("index")))
         else:
-            data={"nick": nick, "msg": '账号或密码错误'}
-            return render(request,"user/login.html", data)
+            data = {"nick": nick, "msg": '账号或密码错误'}
+            return render(request, "user/login.html", data)
