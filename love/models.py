@@ -1,5 +1,8 @@
 from uuid import uuid4
 from django.db import models
+from imagekit.models import ImageSpecField
+from pilkit.processors import ResizeToFill
+
 from user.models import User
 from common.utils import get_file_path
 
@@ -22,6 +25,9 @@ class Post(models.Model):
     uuid = models.UUIDField(unique=True, default=uuid4, editable=False)
     user = models.ForeignKey(User, verbose_name='创建者')
     cover = models.ImageField(verbose_name='图片', upload_to=get_file_path)
+    cover_thumbnail = ImageSpecField(source='cover',
+                                     processors=[ResizeToFill(400, 400)],
+                                     format='JPEG',)
     create_time = models.DateTimeField(auto_now_add=True)
     category = models.ForeignKey(Category, verbose_name='类别')
 
