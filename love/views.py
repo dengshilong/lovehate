@@ -8,7 +8,7 @@ from .models import Post, Category
 
 class Index(generic.ListView):
     model = Post
-    paginate_by = 10
+    paginate_by = 100
 
     def get_queryset(self):
         queryset = super(Index, self).get_queryset()
