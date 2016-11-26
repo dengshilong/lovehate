@@ -28,6 +28,7 @@ class PostCreate(generic.CreateView):
         name = self.request.POST.get('category')
         if not name:
             name = '无题'
+        name = name.replace(" ", "-")  # 替换空格
         category = Category.objects.filter(name=name).first()
         if not category:
             category = Category(name=name)
